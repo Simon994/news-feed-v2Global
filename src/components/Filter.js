@@ -65,12 +65,12 @@ const Filter = ({ params, suggestions, formActive,
             {params.q &&
               <button className="sub-btn" onClick={() => addToFeed('q')}>
                 <div className="filter-label">{params.q}</div>
-                <span>sub<img src={image} /></span>
+                <span>sub<img src={image} alt='subscribe to search'/></span>
               </button>}
             {params.source &&
               <button className="sub-btn" onClick={() => addToFeed('source')}>
                 <div className="filter-label">{params.sourceName}</div>
-                <span>sub<img src={image} /></span>
+                <span>sub<img src={image} alt='subscribe to search'/></span>
               </button>}
           </div>
         </div>

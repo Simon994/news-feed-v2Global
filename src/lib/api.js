@@ -1,17 +1,17 @@
 import axios from 'axios'
 
 const baseUrl = 'https://newsapi.org/v2'
-const apiKey = '9be5f7a0c56142638c29c8c773f91044'
+const apiKey = process.env.REACT_APP_MY_API_KEY
 
 export const getEverything = params => {
-
+  
   let queryString = ''
-  Object.keys(params).map(key => {
+  Object.keys(params).forEach(key => {
     if (params[key]) {
       queryString += `${params[key] ? key + '=' + params[key] + '&' : ''}`
     }
   })
-
+  
   return axios.get(`${baseUrl}/everything?${queryString}apiKey=${apiKey}`)
 }
 

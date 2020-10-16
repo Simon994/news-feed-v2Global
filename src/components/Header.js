@@ -5,10 +5,10 @@ const Header = ({ feedActive, loading }) => {
   return (
     <>
       <div className="header"></div>
-      <div className='heroe' id={loading && 'hero-loading'}>
+      <div className='heroe' id={loading ? 'hero-loading' : ''}>
         <div className="title">
           <em>News Feed</em>
-          <img src={logo} />
+          <img src={logo} alt='Newsfeed logo'/>
         </div>
         <p className="subtitle">browse - create - curate<br /> your own personalised news</p>
         {feedActive
