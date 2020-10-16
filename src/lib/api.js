@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = 'https://newsapi.org/v2'
+const baseUrl = 'https://gnews.io/api/v4'
 const apiKey = process.env.REACT_APP_MY_API_KEY
 
 export const getEverything = params => {
@@ -11,7 +11,7 @@ export const getEverything = params => {
       queryString += `${params[key] ? key + '=' + params[key] + '&' : ''}`
     }
   })
-  
+  console.log(`${baseUrl}/everything?${queryString}apiKey=${apiKey}`)
   return axios.get(`${baseUrl}/everything?${queryString}apiKey=${apiKey}`)
 }
 
@@ -20,5 +20,5 @@ export const getSources = () => {
 }
 
 export const getTopStories = (category) => {
-  return axios.get(`${baseUrl}/top-headlines?category=${category.toLowerCase()}&pageSize=15&apiKey=${apiKey}`)
+  return axios.get(`${baseUrl}/top-headlines?topic=${category.toLowerCase()}&token=${apiKey}`)
 }

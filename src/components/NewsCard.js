@@ -15,13 +15,13 @@ class NewsCard extends React.Component {
   }
 
   render() {
-    const { title, urlToImage, source, author } = this.props
+    const { title, image, source, author } = this.props
 
     return (
-      <div className={`${urlToImage ? 'news-card' : 'news-card-text-only'}`}
+      <div className={`${image ? 'news-card' : 'news-card-text-only'}`}
         onMouseEnter={() => this.hoverAnimate(true)} onMouseLeave={() => this.hoverAnimate(false)}>
         
-        {urlToImage && <img src={urlToImage} alt="article" />}
+        {image && <img src={image} alt="article" />}
         
         <h4>{title}</h4>
         {author && author.length < 20 && <p className='article-info'>Author: {author}</p>}

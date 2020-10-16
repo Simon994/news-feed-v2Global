@@ -46,7 +46,6 @@ class Home extends React.Component {
       const source = type === 'source' ? param[i] : ''
 
       const response = await getEverything({ q: q, sources: source, pageSize: 20 })
-      console.log(response)
       queryObj.push({ q: param[i], articles: response.data.articles })
     }
 

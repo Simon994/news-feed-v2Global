@@ -7,12 +7,12 @@ import { getTopStories } from '../lib/api'
 class TopStories extends React.Component{
   state= {
     stories: null,
-    subselected: 'General',
+    subselected: 'Breaking-news',
     loading: true
   }
 
   async componentDidMount() {
-    const response = await getTopStories('general')
+    const response = await getTopStories('breaking-news')
     
     this.setState({
       stories: response.data,
