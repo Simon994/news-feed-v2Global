@@ -2,6 +2,7 @@ import React from 'react'
 import { getEverything, getSources } from '../lib/api'
 import { saveKeyword, saveSource } from '../lib/feed'
 import { popupNotification } from '../lib/notifications'
+import { countryCodes } from '../lib/countryCodes'
 
 import NewsCard from './NewsCard'
 import Filter from './Filter'
@@ -20,20 +21,22 @@ class Browse extends React.Component {
     formActive: true
   }
 
-  async componentDidMount() {
-    const response = await getSources()
-    this.setState({ sources: response.data.sources })
+  componentDidMount() {
+    // const response = await getSources()
+    this.setState({ 
+      sources: countryCodes
+    })
   }
   
   findMatchingSources(wordSearched) {
     
     return this.state.sources.filter(source => {
       // Remove illegal regex characters
-      const illegalChars = ['(', ')', '[', ']']
-      illegalChars.map(char => wordSearched = wordSearched.replaceAll(char, ''))
+      // const illegalChars = ['(', ')', '[', ']']
+      // illegalChars.map(char => wordSearched = wordSearched.replaceAll(char, ''))
       
       return wordSearched.split(' ').every(word => source.id.match(new RegExp(word, 'i')))
-    }).map(source => source.name)
+    }).map(source => source.id)
   }
   
   handleSubmit = async (event) => {
@@ -46,7 +49,6 @@ class Browse extends React.Component {
     this.toggleForm(false)
 
     const response = await getEverything({ ...this.state.params, sourceName: null })
-    console.log(response)
     this.setState({ 
       articles: response.data.articles
     })
@@ -81,7 +83,7 @@ class Browse extends React.Component {
     let source, sourceName
     // Find matching object in sources and save id and name to params
     for (let i = 0; i < this.state.sources.length; i++) {
-      if (this.state.sources[i].name === event.target.innerHTML) {
+      if (this.state.sources[i].id === event.target.innerHTML) {
         source = this.state.sources[i].id
         sourceName = this.state.sources[i].name
       }
