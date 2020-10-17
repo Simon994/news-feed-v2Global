@@ -26,7 +26,6 @@ export const saveSource = (q, source) => {
 
 export const getSources = () => {
   const list = localStorage.getItem('savedSources')
-  console.log('STILL GETTING SOURCES. GOT LIST FROM LOCALSTORAGE', list)
   if (list){
     return list.split('//')
   } 
@@ -47,8 +46,8 @@ export const removeSubscription = (type, query) => {
   
   localStorage.setItem(itemName,
     localStorage.getItem(itemName)
-      .split(',')
+      .split('//')
       .filter(item => item !== query)
-      .join(',')
+      .join('//')
   )
 }

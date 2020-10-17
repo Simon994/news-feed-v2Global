@@ -30,10 +30,8 @@ class Home extends React.Component {
     }
     
     const sources = getSources()
-    console.log('GOT SOURCES FROM LOCALSTORAGE', sources)
     if (sources) {
       const sourcesObj = await this.getArticlesBySource(sources, 'source')
-      console.log('🎃GOT THIS FAR, wiht sourcesObj:', sourcesObj)
       this.setState({ sources: sourcesObj, loading: false })
     } else {
       this.setState({ sources: null, loading: false })
@@ -55,35 +53,19 @@ class Home extends React.Component {
 
   async getArticlesBySource(sources){
     const queryObj = []
-    console.log('HOME, START GET ARTICLES BY SOURCE')
+
     for (let i = 0; i < sources.length; i++) {
       const keywordSourcePair = sources[i].split(', ')
-      console.log('SPLIT SOURCES TO PAIRS', keywordSourcePair)
       const keyword = keywordSourcePair[0]
       const source = keywordSourcePair[1]
 
       const response = await getEverything({ q: keyword, source: source })
-      console.log('RESPONSE FROM getEverything with keyword and source', response)
-      queryObj.push({ q: source, articles: response.data.articles })
+      queryObj.push({ q: `${keyword}, ${source}`, articles: response.data.articles })
     }
 
     return queryObj
   }
 
-  async getArticles(param, type) {
-    const queryObj = []
-
-
-    for (let i = 0; i < param.length; i++) {
-      const q = type === 'q' ? param[i] : ''
-      const source = type === 'source' ? param[i] : ''
-
-      const response = await getEverything({ q: q, sources: source, pageSize: 20 })
-      queryObj.push({ q: param[i], articles: response.data.articles })
-    }
-
-    return queryObj
-  }
 
   removeSub = (type, query) => {
     removeSubscription(type, query)

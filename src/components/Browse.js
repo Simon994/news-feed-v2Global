@@ -68,8 +68,6 @@ class Browse extends React.Component {
       ...this.state.params,
       [event.target.name]: event.target.value
     }
-
-    console.log('PARAMS:', params)
     
     let suggestions = this.state.suggestions
     if (event.target.name === 'sourceName' && this.state.sources) {
