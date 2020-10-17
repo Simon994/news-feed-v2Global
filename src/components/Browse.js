@@ -119,7 +119,7 @@ class Browse extends React.Component {
       <>
         <div className="header"></div>
         {this.state.errors &&
-          <p style={{ color: '#ffcaff', textAlign: 'center', fontSize: '25px' }}>Keyword is required</p>
+          <p style={{ color: '#f03', textAlign: 'center', fontSize: '25px' }}>Keyword is required</p>
         }
         <Filter params={this.state.params}
           suggestions={this.state.suggestions}
