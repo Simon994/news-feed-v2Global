@@ -11,8 +11,8 @@ export const getEverything = params => {
       queryString += `${params[key] ? key + '=' + params[key] + '&' : ''}`
     }
   })
-  console.log(`${baseUrl}/everything?${queryString}apiKey=${apiKey}`)
-  return axios.get(`${baseUrl}/everything?${queryString}apiKey=${apiKey}`)
+  console.log(`${baseUrl}/search?${queryString}token=${apiKey}`)
+  return axios.get(`${baseUrl}/search?${queryString}token=${apiKey}`)
 }
 
 export const getSources = () => {
