@@ -7,7 +7,7 @@ const Header = ({ feedActive, loading }) => {
       <div className="header"></div>
       <div className='heroe' id={loading ? 'hero-loading' : ''}>
         <div className="title">
-          <em>News Feed v2Global</em>
+          <em>News Feed v2-Global</em>
           <img src={logo} alt='Newsfeed logo'/>
         </div>
         <p className="subtitle">browse - create - curate<br /> your own personalised news</p>
