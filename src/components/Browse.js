@@ -107,7 +107,7 @@ class Browse extends React.Component {
 
   addToFeed = param => {
     if (param === 'q') saveKeyword(this.state.params.q)
-    if (param === 'source') saveSource(this.state.params.source)
+    if (param === 'source') saveSource(this.state.params.q, this.state.params.source)
     
     popupNotification('Added in Feed')
   }

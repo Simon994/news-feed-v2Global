@@ -13,11 +13,13 @@ export const getKeywords = () => {
   return null
 }
 
-export const saveSource = (source) => {
+export const saveSource = (q, source) => {
   let list = localStorage.getItem('savedSources')
-  if (!list) list = source
-  else if (!list.split(',').includes(source)) {
-    list = `${list},${source}`
+  const re = new RegExp(`(${q}, ${source})`)
+  
+  if (!list) list = `(${q}, ${source})`
+  else if (!list.match(re)) {
+    list = `${list},(${q}, ${source})`
   }
   localStorage.setItem('savedSources', list)
 }
