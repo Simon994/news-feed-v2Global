@@ -15,7 +15,6 @@ class SectionScroll extends React.Component {
 
   render() {
     const { query, type, removeSub } = this.props
-    console.log('COMING INTO RENDER HERE, here is the query:', query)
 
     let source = 'global'
     let keyword = query.q
@@ -25,9 +24,8 @@ class SectionScroll extends React.Component {
       keyword = keywordSourcePair[0]
       source = keywordSourcePair[1]
     
-      console.log('RENDER THE SOURCE AND KEYWORD for SectionSCROLL', source, keyword) 
       const countryObjToFind = countryCodes.filter(country => country.name === source)
-      console.log('FOUND THIS MATCHING COUNTRY', countryObjToFind[0].id)
+
       source = countryObjToFind[0].id
     }
     

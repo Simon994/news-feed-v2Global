@@ -25,7 +25,7 @@ const Filter = ({ params, suggestions, formActive,
           autoComplete="off"
           style={{ height: formActive ? '500px' : '0px' }} >
           <div className="field">
-            <label className="label">Keyword</label>
+            <label className="label">Keyword (required)</label>
             <div className="control">
               <input
                 className="input"

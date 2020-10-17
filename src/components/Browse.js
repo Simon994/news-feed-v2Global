@@ -18,7 +18,8 @@ class Browse extends React.Component {
     sources: null,
     articles: null,
     suggestions: '',
-    formActive: true
+    formActive: true,
+    errors: null
   }
 
   componentDidMount() {
@@ -42,9 +43,6 @@ class Browse extends React.Component {
   handleSubmit = async (event) => {
     event.preventDefault()
     
-    
-    
-    
     // Show error message to user if invalid source
     if (this.state.params.sourceName !== '' && this.state.params.source === '') {
       popupNotification('No source matching that name')
@@ -52,10 +50,17 @@ class Browse extends React.Component {
     }
     this.toggleForm(false)
 
-    const response = await getEverything({ ...this.state.params })
-    this.setState({ 
-      articles: response.data.articles
-    })
+    try {
+      const response = await getEverything({ ...this.state.params })
+      this.setState({ 
+        articles: response.data.articles
+      })
+    } catch (err){
+      console.log(err.response.data.errors.q)
+      const errors = err.response.data.errors.q
+
+      this.setState({ errors })
+    }
   }
 
   toggleForm = (state) => {
@@ -80,7 +85,7 @@ class Browse extends React.Component {
       }
     }
     
-    this.setState({ params, suggestions })
+    this.setState({ params, suggestions, errors: null })
   }
 
   handleAutocomplete = event => {
@@ -114,7 +119,9 @@ class Browse extends React.Component {
     return (
       <>
         <div className="header"></div>
-
+        {this.state.errors &&
+          <p style={{ color: 'red', textAlign: 'center', fontSize: '25px' }}>Keyword is required</p>
+        }
         <Filter params={this.state.params}
           suggestions={this.state.suggestions}
           formActive={this.state.formActive}
