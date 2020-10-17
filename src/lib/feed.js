@@ -15,18 +15,21 @@ export const getKeywords = () => {
 
 export const saveSource = (q, source) => {
   let list = localStorage.getItem('savedSources')
-  const re = new RegExp(`(${q}, ${source})`)
+  const re = new RegExp(`${q}, ${source}`)
   
-  if (!list) list = `(${q}, ${source})`
+  if (!list) list = `${q}, ${source}`
   else if (!list.match(re)) {
-    list = `${list},(${q}, ${source})`
+    list = `${list}//${q}, ${source}`
   }
   localStorage.setItem('savedSources', list)
 }
 
 export const getSources = () => {
   const list = localStorage.getItem('savedSources')
-  if (list) return list.split(',')
+  console.log('STILL GETTING SOURCES. GOT LIST FROM LOCALSTORAGE', list)
+  if (list){
+    return list.split('//')
+  } 
   return null
 }
 

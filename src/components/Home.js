@@ -23,23 +23,56 @@ class Home extends React.Component {
 
     const keywords = getKeywords()
     if (keywords) {
-      const keywordsObj = await this.getArticles(keywords, 'q')
+      const keywordsObj = await this.getArticlesByKeyword(keywords, 'q')
       this.setState({ keywords: keywordsObj })
     } else {
       this.setState({ keywords: null })
     }
     
     const sources = getSources()
+    console.log('GOT SOURCES FROM LOCALSTORAGE', sources)
     if (sources) {
-      const sourcesObj = await this.getArticles(sources, 'source')
+      const sourcesObj = await this.getArticlesBySource(sources, 'source')
+      console.log('🎃GOT THIS FAR, wiht sourcesObj:', sourcesObj)
       this.setState({ sources: sourcesObj, loading: false })
     } else {
       this.setState({ sources: null, loading: false })
     }
   }
 
+
+  async getArticlesByKeyword(keywords){
+    const queryObj = []
+
+    for (let i = 0; i < keywords.length; i++) {
+      const keyword = keywords[i]
+      const response = await getEverything({ q: keyword, source: '' })
+      queryObj.push({ q: keyword, articles: response.data.articles })
+    }
+
+    return queryObj
+  }
+
+  async getArticlesBySource(sources){
+    const queryObj = []
+    console.log('HOME, START GET ARTICLES BY SOURCE')
+    for (let i = 0; i < sources.length; i++) {
+      const keywordSourcePair = sources[i].split(', ')
+      console.log('SPLIT SOURCES TO PAIRS', keywordSourcePair)
+      const keyword = keywordSourcePair[0]
+      const source = keywordSourcePair[1]
+
+      const response = await getEverything({ q: keyword, source: source })
+      console.log('RESPONSE FROM getEverything with keyword and source', response)
+      queryObj.push({ q: source, articles: response.data.articles })
+    }
+
+    return queryObj
+  }
+
   async getArticles(param, type) {
     const queryObj = []
+
 
     for (let i = 0; i < param.length; i++) {
       const q = type === 'q' ? param[i] : ''
