@@ -37,11 +37,11 @@ const Filter = ({ params, suggestions, formActive,
             </div>
           </div>
           <div className="field autocomplete-container">
-            <label className="label">Source</label>
+            <label className="label">Country</label>
             <div className="control">
               <input
                 className="input"
-                placeholder="Source"
+                placeholder="Start typing to see matching available countries"
                 name="sourceName"
                 value={params.sourceName}
                 onChange={handleChange}

@@ -41,6 +41,10 @@ class Browse extends React.Component {
   
   handleSubmit = async (event) => {
     event.preventDefault()
+    
+    
+    
+    
     // Show error message to user if invalid source
     if (this.state.params.sourceName !== '' && this.state.params.source === '') {
       popupNotification('No source matching that name')
@@ -48,7 +52,7 @@ class Browse extends React.Component {
     }
     this.toggleForm(false)
 
-    const response = await getEverything({ ...this.state.params, sourceName: null })
+    const response = await getEverything({ ...this.state.params })
     this.setState({ 
       articles: response.data.articles
     })
@@ -64,6 +68,8 @@ class Browse extends React.Component {
       ...this.state.params,
       [event.target.name]: event.target.value
     }
+
+    console.log('PARAMS:', params)
     
     let suggestions = this.state.suggestions
     if (event.target.name === 'sourceName' && this.state.sources) {
@@ -84,8 +90,8 @@ class Browse extends React.Component {
     // Find matching object in sources and save id and name to params
     for (let i = 0; i < this.state.sources.length; i++) {
       if (this.state.sources[i].id === event.target.innerHTML) {
-        source = this.state.sources[i].id
-        sourceName = this.state.sources[i].name
+        source = this.state.sources[i].name
+        sourceName = this.state.sources[i].id
       }
     }
 
