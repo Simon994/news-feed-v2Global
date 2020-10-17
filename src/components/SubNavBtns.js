@@ -2,7 +2,7 @@ import React from 'react'
 
 const SubNavBtns = (props) => {
 
-  const btnCategories = ['Breaking-news', 'Business', 'Technology', 'Entertainment', 'Health', 'Sport']
+  const btnCategories = ['Breaking-news', 'Business', 'Technology', 'Entertainment', 'Health', 'Sports']
 
   return (
     btnCategories.map((category, i) => {

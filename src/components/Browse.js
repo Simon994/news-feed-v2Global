@@ -1,5 +1,5 @@
 import React from 'react'
-import { getEverything, getSources } from '../lib/api'
+import { getEverything } from '../lib/api'
 import { saveKeyword, saveSource } from '../lib/feed'
 import { popupNotification } from '../lib/notifications'
 import { countryCodes } from '../lib/countryCodes'
@@ -23,7 +23,6 @@ class Browse extends React.Component {
   }
 
   componentDidMount() {
-    // const response = await getSources()
     this.setState({ 
       sources: countryCodes
     })
@@ -120,7 +119,7 @@ class Browse extends React.Component {
       <>
         <div className="header"></div>
         {this.state.errors &&
-          <p style={{ color: 'red', textAlign: 'center', fontSize: '25px' }}>Keyword is required</p>
+          <p style={{ color: '#ffcaff', textAlign: 'center', fontSize: '25px' }}>Keyword is required</p>
         }
         <Filter params={this.state.params}
           suggestions={this.state.suggestions}
